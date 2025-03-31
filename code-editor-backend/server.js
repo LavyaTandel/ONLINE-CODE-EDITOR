@@ -23,6 +23,7 @@ if (!fs.existsSync(tempDir)) {
 app.post('/api/execute', (req, res) => {
   const { code, language } = req.body;
   
+  // Validate input
   if (!code || !language) {
     return res.status(400).json({ error: 'Code and language are required' });
   }
@@ -42,7 +43,6 @@ app.post('/api/execute', (req, res) => {
       break;
     case 'java':
       fileExtension = 'java';
-      // For Java, we would need additional handling for class names
       command = 'javac';
       return res.status(400).json({ error: 'Java is not supported yet' });
     case 'c++':
